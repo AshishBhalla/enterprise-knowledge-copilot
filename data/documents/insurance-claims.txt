@@ -1,0 +1,6 @@
+Title: Insurance Claims Process
+Department: Insurance
+Region: Australia
+
+The insurance claims process includes claim registration,
+document verification, assessment, and settlement review.
