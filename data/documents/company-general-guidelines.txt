@@ -1,0 +1,17 @@
+Title: Company General Guidelines
+Department: General
+Region: Global
+
+Company Knowledge Management Guidelines
+
+All employees should follow the company's standard knowledge management practices to ensure that information is accurate, accessible, and up to date.
+
+Documents should be stored in the approved company repositories, such as SharePoint. Each document should include relevant metadata, including title, department, region, document owner, and last updated date.
+
+Employees should verify information before sharing it with clients or other teams. Outdated documents should be reviewed and updated by the responsible document owner.
+
+When a team member cannot find the required information, they should contact the relevant department or knowledge management team for assistance.
+
+Sensitive or confidential information must only be accessed by authorized employees. Users should not share restricted documents with people who do not have the required permissions.
+
+The knowledge management team is responsible for maintaining document organization, improving search capabilities, and helping employees locate relevant information efficiently.

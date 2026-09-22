@@ -1,15 +1,14 @@
-import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import type { IndexedChunk, Similarity } from "./type.js";
-import { embeddings } from "./utlis.js";
-import { runDataPipeline } from "./dataPipeline.js";
-import { checkSimilarity } from "./checkSimilarity.js";
-import { sorting } from "./utlis.js";
-import { topK } from "./topk.js";
-import { createContext } from "./utlis.js";
-import { callModel } from "./utlis.js";
+import type { IndexedChunk, Similarity } from "./types/type.js";
+import { embeddings } from "./utils/utlis.js";
+import { runDataPipeline } from "./pipeline/dataPipeline.js";
+import { checkSimilarity } from "./features/similarity/checkSimilarity.js";
+import { sorting } from "./utils/utlis.js";
+import { topK } from "./features/similarity/topk.js";
+import { createContext } from "./utils/utlis.js";
+import { callModel } from "./utils/utlis.js";
 
 const rl = readline.createInterface({ input, output });
 
