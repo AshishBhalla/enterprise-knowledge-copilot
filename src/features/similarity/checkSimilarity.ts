@@ -12,6 +12,7 @@ export async function checkSimilarity(
       chunkId: item.chunkId,
       content: item.content,
       similarity: similarityScore,
+      source: item.fileName
     });
   }
   return scoredArray;

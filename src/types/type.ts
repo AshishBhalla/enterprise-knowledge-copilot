@@ -22,4 +22,5 @@ export type Similarity = {
   chunkId: number;
   content: string;
   similarity: number;
+  source: string;
 };

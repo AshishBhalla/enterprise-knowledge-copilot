@@ -17,8 +17,10 @@ export function sorting(arr: Similarity[]): Similarity[] {
 export function createContext(topk: Similarity[]): string {
   let context = "";
   for (const item of topk) {
-    context += item.content;
+    context += `Source: ${item.source}\n`;
+    context += `Content: ${item.content}"\n`;
   }
+  console.log(context)
   return context;
 }
 
@@ -33,7 +35,12 @@ export async function callModel(question: string, context: string) {
 function createPrompt(context: string, question: string): string {
   return `INSTRUCTION
 Use the provided context to answer the question.
-If the answer isn't present in the context, say that you don't know.
+Identify the source(s) in the context that support your answer.
+At the end of the answer, provide the source(s) you used.
+Only cite sources that are present in the provided context.
+Do not invent or infer source names.
+If the answer is not present in the context, say that you don't know.
+Also, don't cite the source if Answer is not known.
 CONTEXT
 ${context}
 QUESTION

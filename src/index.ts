@@ -17,7 +17,7 @@ async function readDir(folderPath: string): Promise<void> {
   try {
     embededDocuments = await runDataPipeline(folderPath);
   } catch (err) {
-    console.log("Error", err);
+    throw err;
   }
 
   //   User Input processing
@@ -30,6 +30,7 @@ async function readDir(folderPath: string): Promise<void> {
       userEmbedding,
     );
     const sortedBySimilarty = sorting(similarity);
+    // console.log(sortedBySimilarty);
     const context: string = createContext(topK(sortedBySimilarty));
     const llmResponse = await callModel(userMessage, context);
     console.log(`Bot: ${JSON.stringify(llmResponse.response)}`);
