@@ -24,3 +24,9 @@ export type Similarity = {
   similarity: number;
   source: string;
 };
+
+export type User = {
+  user: string;
+  department: string;
+  region: string;
+};

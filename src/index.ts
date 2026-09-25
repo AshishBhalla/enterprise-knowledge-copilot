@@ -1,7 +1,7 @@
 import path from "node:path";
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import type { IndexedChunk, Similarity } from "./types/type.js";
+import type { IndexedChunk, Similarity, User } from "./types/type.js";
 import { embeddings } from "./utils/utlis.js";
 import { runDataPipeline } from "./pipeline/dataPipeline.js";
 import { checkSimilarity } from "./features/similarity/checkSimilarity.js";
@@ -13,6 +13,11 @@ import { callModel } from "./utils/utlis.js";
 const rl = readline.createInterface({ input, output });
 
 async function readDir(folderPath: string): Promise<void> {
+  const similuatedUser: User = {
+    user: "Ashish",
+    department: "Sales",
+    region: "Global",
+  };
   let embededDocuments: IndexedChunk[] = [];
   try {
     embededDocuments = await runDataPipeline(folderPath);
@@ -28,9 +33,10 @@ async function readDir(folderPath: string): Promise<void> {
     const similarity: Similarity[] = await checkSimilarity(
       embededDocuments,
       userEmbedding,
+      similuatedUser,
     );
     const sortedBySimilarty = sorting(similarity);
-    // console.log(sortedBySimilarty);
+    console.log(sortedBySimilarty);
     const context: string = createContext(topK(sortedBySimilarty));
     const llmResponse = await callModel(userMessage, context);
     console.log(`Bot: ${JSON.stringify(llmResponse.response)}`);
