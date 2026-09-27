@@ -1,0 +1,47 @@
+export function filterStopWords(text: string): string {
+  const stopWords = new Set([
+    "a",
+    "an",
+    "the",
+    "is",
+    "am",
+    "are",
+    "was",
+    "were",
+    "be",
+    "been",
+    "being",
+    "have",
+    "has",
+    "had",
+    "do",
+    "does",
+    "did",
+    "and",
+    "but",
+    "or",
+    "so",
+    "in",
+    "on",
+    "at",
+    "to",
+    "for",
+    "of",
+    "with",
+    "by",
+    "from",
+    "i",
+    "you",
+    "he",
+    "she",
+    "it",
+    "we",
+    "they",
+    "this",
+    "that",
+  ]);
+
+  const words = text.toLowerCase().split(/[\s,.:;!?()"'-]+/);
+  const cleanWords = words.filter((word) => word && !stopWords.has(word));
+  return cleanWords.join(" ");
+}

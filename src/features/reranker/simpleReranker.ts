@@ -2,10 +2,10 @@ import { Similarity, Reranked } from "../../types/type.js";
 import { sorting } from "../../utils/utlis.js";
 import { RELEVANCE_SCORE } from "../../config/constants.js";
 
-export function reranker(
-  candidates: Similarity[],
+export function reranker<T extends { content: string }>(
+  candidates: T[],
   question: string,
-): Reranked[] {
+): T[] {
   const questionArray = question.split(" ");
   const reankedArray = [];
   for (const candidate of candidates) {

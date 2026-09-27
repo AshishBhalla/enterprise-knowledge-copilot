@@ -25,9 +25,14 @@ export type Similarity = {
   source: string;
 };
 
-export type Reranked = {
-  relevanceScore: number;
-} & Similarity;
+export type Keyword = {
+  chunkId: number;
+  content: string;
+  matches: number;
+  source: string;
+};
+
+export type Reranked = { relevanceScore: number } & (Similarity | Keyword);
 
 export type User = {
   user: string;

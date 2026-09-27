@@ -6,3 +6,4 @@ export const DEFAULT_DEPARTMENT = "General";
 export const DEFAULT_REGION = "Global";
 export const SIMILARITY = "similarity";
 export const RELEVANCE_SCORE = "relevanceScore"
+export const MATCHES = "matches"

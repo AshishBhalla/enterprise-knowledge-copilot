@@ -1,6 +1,6 @@
 import ollama from "ollama";
 import { EMBEDDING_MODEL, MODEL_NAME } from "../config/constants.js";
-import type { Similarity } from "../types/type.js";
+import type { Similarity, Keyword } from "../types/type.js";
 
 export async function embeddings(input: string): Promise<number[]> {
   const response = await ollama.embed({
@@ -16,9 +16,9 @@ export function sorting<T>(arr: T[], property: keyof T): T[] {
   );
 }
 
-export function createContext(topk: Similarity[]): string {
+export function createContext(topN:(Similarity | Keyword)[]): string {
   let context = "";
-  for (const item of topk) {
+  for (const item of topN) {
     context += `Source: ${item.source}\n`;
     context += `Content: ${item.content}"\n`;
   }
