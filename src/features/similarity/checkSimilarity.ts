@@ -1,6 +1,6 @@
 import cosineSimilarity from "./similarity.js";
 import type { IndexedChunk, Similarity, User } from "../../types/type.js";
-import { defaultDepartment, defaultRegion } from "../../config/constants.js";
+import { DEFAULT_DEPARTMENT, DEFAULT_REGION } from "../../config/constants.js";
 
 export async function checkSimilarity(
   datastore: IndexedChunk[],
@@ -12,10 +12,10 @@ export async function checkSimilarity(
     if (
       (item.metadata.department === userAccess.department &&
         item.metadata.region === userAccess.region) ||
-      (item.metadata.department === defaultDepartment &&
-        item.metadata.region === defaultRegion)
+      (item.metadata.department === DEFAULT_DEPARTMENT &&
+        item.metadata.region === DEFAULT_REGION)
     ) {
-      console.log("Selected item", item.content, item.content);
+      // console.log("Selected item", item.content, item.content);
       const similarityScore = cosineSimilarity(item.embedding, userEmbedding);
       scoredArray.push({
         chunkId: item.chunkId,
@@ -23,8 +23,6 @@ export async function checkSimilarity(
         similarity: similarityScore,
         source: item.fileName,
       });
-    } else {
-      console.log("Filtering item", item);
     }
   }
   return scoredArray;

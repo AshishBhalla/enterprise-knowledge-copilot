@@ -25,6 +25,10 @@ export type Similarity = {
   source: string;
 };
 
+export type Reranked = {
+  relevanceScore: number;
+} & Similarity;
+
 export type User = {
   user: string;
   department: string;

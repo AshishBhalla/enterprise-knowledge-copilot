@@ -1,5 +1,5 @@
 import type { MetaData } from "../../types/type.js";
-import { defaultDepartment, defaultRegion } from "../../config/constants.js";
+import { DEFAULT_DEPARTMENT, DEFAULT_REGION } from "../../config/constants.js";
 
 export function processMetadata(contentArray: string[]): MetaData {
   const metadata: MetaData = { title: "", department: "", region: "" };
@@ -32,8 +32,8 @@ export function processMetadata(contentArray: string[]): MetaData {
       }
     } else if (firstItem === 0) {
       metadata["title"] = item;
-      metadata["department"] = defaultDepartment;
-      metadata["region"] = defaultRegion;
+      metadata["department"] = DEFAULT_DEPARTMENT;
+      metadata["region"] = DEFAULT_REGION;
     }
     firstItem += 1;
   }

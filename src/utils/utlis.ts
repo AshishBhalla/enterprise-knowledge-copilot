@@ -10,8 +10,10 @@ export async function embeddings(input: string): Promise<number[]> {
   return response.embeddings[0] ?? [];
 }
 
-export function sorting(arr: Similarity[]): Similarity[] {
-  return [...arr].sort((a, b) => b.similarity - a.similarity);
+export function sorting<T>(arr: T[], property: keyof T): T[] {
+  return [...arr].sort(
+    (a, b) => Number(b[property]) - Number(a[property]),
+  );
 }
 
 export function createContext(topk: Similarity[]): string {
@@ -20,7 +22,6 @@ export function createContext(topk: Similarity[]): string {
     context += `Source: ${item.source}\n`;
     context += `Content: ${item.content}"\n`;
   }
-  console.log(context)
   return context;
 }
 

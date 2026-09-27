@@ -1,7 +1,7 @@
 import path from "node:path";
 import * as readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
-import type { IndexedChunk, Similarity, User } from "./types/type.js";
+import type { IndexedChunk, Similarity, User, Reranked } from "./types/type.js";
 import { embeddings } from "./utils/utlis.js";
 import { runDataPipeline } from "./pipeline/dataPipeline.js";
 import { checkSimilarity } from "./features/similarity/checkSimilarity.js";
@@ -9,6 +9,8 @@ import { sorting } from "./utils/utlis.js";
 import { topK } from "./features/similarity/topk.js";
 import { createContext } from "./utils/utlis.js";
 import { callModel } from "./utils/utlis.js";
+import { reranker } from "./features/reranker/simpleReranker.js";
+import { SIMILARITY } from "./config/constants.js";
 
 const rl = readline.createInterface({ input, output });
 
@@ -35,9 +37,12 @@ async function readDir(folderPath: string): Promise<void> {
       userEmbedding,
       similuatedUser,
     );
-    const sortedBySimilarty = sorting(similarity);
-    console.log(sortedBySimilarty);
-    const context: string = createContext(topK(sortedBySimilarty));
+    const sortedBySimilarty: Similarity[] = sorting(similarity,SIMILARITY);
+    const top_k: Similarity[] = topK(sortedBySimilarty);
+    console.log('top-k',top_k);
+    const top_n: Reranked[] = reranker(top_k,userMessage)
+    console.log('top-n',top_n);
+    const context: string = createContext(top_n);
     const llmResponse = await callModel(userMessage, context);
     console.log(`Bot: ${JSON.stringify(llmResponse.response)}`);
   }
